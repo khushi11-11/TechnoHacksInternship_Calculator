@@ -1,0 +1,38 @@
+const display = document.getElementById('display');
+let currentInput = '';
+
+const updateDisplay = () => {
+    display.textContent = currentInput || '0';
+}
+
+const appendToDisplay = (value) => {
+    currentInput += value;
+    updateDisplay();
+}
+
+const clearDisplay = () => {
+    currentInput = '';
+    updateDisplay();
+}
+
+const delLast = () => {
+    currentInput = currentInput.slice(0, -1);
+    updateDisplay();
+}
+
+const appendOpr = (operator) => {
+    if(currentInput.length > 0 && '+-*/.' .includes(currentInput.slice(-1))){
+        currentInput = currentInput.slice(0, -1);
+    }
+    currentInput += operator;
+    updateDisplay();
+}
+
+const calculate = () => {
+    try{
+        currentInput = eval(currentInput).toString();
+        updateDisplay();
+    } catch(error){
+        display.textContent = 'ERROR !!';
+    }
+}
